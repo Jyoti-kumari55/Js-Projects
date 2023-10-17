@@ -15,6 +15,12 @@ async function searchItem(){
 const response = await fetch(url);
 const data = await response.json();
 
+if (page === 1){
+    searchResult.innerHTML = "";
+
+}
+
+//Displaying images
 const results = data.results;
 results.map((result) => {
     const image = document.createElement("img");
@@ -25,6 +31,7 @@ results.map((result) => {
     imageLink.appendChild(image);
     searchResult.appendChild(imageLink);
 })
+showMoreBtn.style.display = "block";
 
 };
 
@@ -33,3 +40,7 @@ searchForm.addEventListener("submit", (e) => {
     page = 1;
     searchItem();
 })
+showMoreBtn.addEventListener("click", () => {
+    page++;
+    searchItem();
+} )
